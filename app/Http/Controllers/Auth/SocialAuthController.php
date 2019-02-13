@@ -19,32 +19,36 @@ class SocialAuthController extends Controller
 
     public function callback($provider)
     {
-        // try {
-            $user = Socialite::driver($provider)->user();
-            $input['name'] = $user->getName();
-            $input['email'] = $user->getEmail();
-            $input['provider'] = $provider;
-            $input['provider_id'] = $user->getId();
+        $user = Socialite::driver($provider)->user();
 
-            $authUser = $this->findOrCreate($input);
-            auth()->login($authUser);
+        $name = $user->getName()
+            ?: $user->getNickname()
+            ?: 'unknown';
 
-            return redirect($this->redirectTo);
-        // } catch (Exception $e) {
-        //     return redirect('auth/' . $provider);
-        // }
+        $user = (\App\User::whereEmail($user->getEmail())->first())
+            ?: \App\User::create([
+                'name' => $name,
+                'email' => $user->getEmail(),
+                'provider' => $provider,
+                'provider_id' => $user->getId()
+            ]);
+
+        auth()->login($user);
+
+        return redirect($this->redirectTo);
     }
 
-    public function findOrCreate($input)
-    {
-        $user = \App\User::where('provider', $input['provider'])
-            ->where('provider_id', $input['provider_id'])
-            ->first();
+    // public function findOrCreate($input)
+    // {
+    //     $user = \App\User::where('provider', $input['provider'])
+    //         ->where('provider_id', $input['provider_id'])
+    //         ->where('email', $input['email'])
+    //         ->first();
 
-        if ($user) {
-            return $user;
-        } else {
-            return \App\User::create($input);
-        }
-    }
+    //     if ($user) {
+    //         return $user;
+    //     } else {
+    //         return \App\User::create($input);
+    //     }
+    // }
 }

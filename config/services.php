@@ -40,4 +40,16 @@ return [
         'client_secret' => env('GITHUB_SECRET'),
         'redirect' => env('GITHUB_CALLBACK'),
     ],
+
+    'naver' => [
+        'client_id' => env('NAVER_ID'),
+        'client_secret' => env('NAVER_SECRET'),
+        'redirect' => env('NAVER_CALLBACK'),
+    ],
+
+    'kakao' => [
+        'client_id' => env('KAKAO_ID'),
+        'client_secret' => env('KAKAO_SECRET'),
+        'redirect' => env('KAKAO_CALLBACK'),
+    ],
 ];

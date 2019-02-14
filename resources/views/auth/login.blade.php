@@ -55,6 +55,10 @@
                                     Login
                                 </button>
 
+                                <a href="/auth/naver" class="btn btn-success">Log in with Naver</a>
+                                <a href="/auth/kakao" class="btn btn-warning">Log in with Kakao</a>
+
+
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>

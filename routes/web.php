@@ -20,3 +20,5 @@ Route::get('auth/{provider}', 'Auth\SocialAuthController@redirect');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@callback');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('categories', 'CategoriesController');

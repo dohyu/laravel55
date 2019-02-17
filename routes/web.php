@@ -22,3 +22,7 @@ Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@callback');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('categories', 'CategoriesController');
+
+Route::get('/test', function() {
+    print_r(factory(App\Category::class)->make());
+});

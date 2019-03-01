@@ -24,5 +24,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategoriesController');
 
 Route::get('/test', function() {
-    print_r(factory(App\Category::class)->make());
+    //print_r(factory(App\Category::class)->make());
 });

@@ -14,11 +14,11 @@ class Category extends Model
 
     public function parent()
     {
-	    $this->belongsTo(Category::class, 'parent_id', 'id');
+	    return $this->belongsTo('App\Category', 'parent_id');
     }
 
     public function children()
     {
-        $this->hasMany(Category::class, 'parent_id')->latest();
+        return $this->hasMany('App\Category', 'parent_id');
     }
 }

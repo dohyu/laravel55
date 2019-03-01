@@ -14,4 +14,16 @@ class CategoriesController extends Controller
         
         return view('categories.index', compact('categories'));
     }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'value' => 'required',
+        ]);
+
+        $category = \App\Category::create($request->all());
+
+        return redirect(route('categories.index', 'parent_id=' . $request->get('parent_id')));
+    }
 }

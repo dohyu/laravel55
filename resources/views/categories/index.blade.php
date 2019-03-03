@@ -29,6 +29,7 @@
                         <tr>
                             <th>#</th>
                             <th>카테고리</th>
+                            <th>키</th>
                             <th>값</th>
                             <th>편집</th>
                         </tr>
@@ -37,8 +38,9 @@
                         @forelse ($categories as $category)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td><a href="{{ route('categories.index') }}?parent_id={{ $category->id }}">{{ $category->name }}</a></td>
-                            <td><textarea rows="3" class="form-control">{{ $category->value }}</textarea></td>
+                            <td><a href="{{ route('categories.index') }}?parent_id={{ $category->id }}">{{ $category->title }}</a></td>
+                            <td>{{ $category->key_name }}</td>
+                            <td>{{ $category->key_value }}</td>
                             <td>
                                 <button class="btn btn-info btn-xs">수정</button>
                                 <button class="btn btn-danger btn-xs">삭제</button>
@@ -46,7 +48,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4">등록된 카테고리가 없습니다.</td>
+                            <td colspan="5">등록된 카테고리가 없습니다.</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -69,12 +71,16 @@
                     <div class="modal-body">
                         
                         <div class="form-group">
-                            <label for="#title">카테고리 이름</label>
-                            <input type="text" name="name" id="title" class="form-control" onFocus="this.select()" />
+                            <label for="title">카테고리</label>
+                            <input type="text" name="title" id="title" class="form-control" onFocus="this.select()" />
                         </div>
                         <div class="form-group">
-                            <label for="">카테고리 값</label>
-                            <textarea name="value" id="value" rows="3" class="form-control"></textarea>
+                            <label for="key_name">키</label>
+                            <input type="text" name="key_name" id="key_name" class="form-control" onFocus="this.select()" />
+                        </div>
+                        <div class="form-group">
+                            <label for="key_value">값</label>
+                            <textarea name="key_value" id="key_value" rows="3" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

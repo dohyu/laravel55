@@ -26,3 +26,5 @@ Route::resource('categories', 'CategoriesController');
 Route::get('/test', function() {
     //print_r(factory(App\Category::class)->make());
 });
+
+Route::get('articles/{category?}', 'ArticlesController@index');

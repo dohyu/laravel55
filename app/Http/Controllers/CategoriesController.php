@@ -9,7 +9,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $query = \App\Category::whereParentId($request->get('parent_id'));
-        $query = $query->orderBy('name', 'asc');
+        $query = $query->orderBy('title', 'asc');
         $categories = $query->get();
         
         return view('categories.index', compact('categories'));
@@ -18,8 +18,8 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'value' => 'required',
+            'title' => 'required',
+            'key_name' => 'required'
         ]);
 
         $category = \App\Category::create($request->all());

@@ -28,3 +28,5 @@ Route::get('/test', function() {
 });
 
 Route::get('articles/{category?}', 'ArticlesController@index');
+Route::get('articles/{category?}/{id}', 'ArticlesController@show');
+//Route::resource('articles/{category?}', 'ArticlesController');

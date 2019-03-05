@@ -35,11 +35,11 @@
                     <tbody>
                         @forelse ($articles as $article)
                         <tr>
-                            <td>{{ $articleNum-- }}</td>
-                            <td>{{ $article->title }}</td>
+                            <td class="text-right">{{ $articleNum-- }}</td>
+                            <td><a href="/articles/{{ $article->category->key_name }}/{{ $article->id }}">{{ $article->title }}</a></td>
                             <td>{{ $article->user->name }}</td>
                             <td>{{ $article->created_at }}</td>
-                            <td></td>
+                            <td class="text-right">{{ number_format($article->view_count) }}</td>
                         </tr>
                         @empty
                         <tr>

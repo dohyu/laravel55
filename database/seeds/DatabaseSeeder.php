@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         $faker = app(Faker\Generator::class);
 
         \App\Article::truncate();
-        $categoryIds = \App\Category::whereParentId(2)->pluck('id');
+        $categoryIds = \App\Category::
+            whereKeyName('articles')->firstOrFail()
+            ->children()->pluck('id');
         for ($i = 0; $i < 100; $i++) {
             $date = $faker->dateTimeThisMonth;
 

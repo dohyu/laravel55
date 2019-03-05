@@ -9,13 +9,26 @@ class ArticlesController extends Controller
     public function index($category = 'notice')
     {
         // 게시판 리스트
-        $articlesCategoryId = \App\Category::whereKeyName('articles')->pluck('id');
-        $articleCategories = \App\Category::whereParentId($articlesCategoryId)->get();
+        $articleCategories = $this->categories();
 
         // 게시판 자료
-        $categoryId = \App\Category::whereKeyName($category)->pluck('id');
-        $articles = \App\Article::whereCategoryId($categoryId)->paginate(10);
+        $articles = \App\Category::
+            whereKeyName($category)->firstOrFail()
+            ->articles()->paginate(10);
 
         return view('articles.index', compact('articles', 'articleCategories'));
+    }
+
+    public function show($category, $id)
+    {
+        $articleCategories = $this->categories();
+        $article = \App\Article::findOrFail($id);
+
+        return view('articles.show', compact('article', 'articleCategories'));
+    }
+
+    private function categories()
+    {
+        return \App\Category::whereKeyName('articles')->firstOrFail()->children()->get();
     }
 }

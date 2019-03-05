@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('title');
             $table->text('content');
+            $table->integer('view_count')->unsigned()->default(0);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
